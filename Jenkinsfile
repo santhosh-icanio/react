@@ -1,20 +1,15 @@
 pipeline {
     agent any
-
+    
     stages {
-       
-
-        stage('Install Dependencies') {
+        stage('Build') {
             steps {
-                sh 'npm install'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                // You can customize this step based on your deployment strategy
-                sh 'npm start'
+                sh "npm install"
+               // sh "pm2 stop react"
+                sh "pm2 start --name react  npm -- start"
+                sh "sleep 10"
+                sh "pm2 list"
             }
         }
     }
-}
+    }
